@@ -2,15 +2,13 @@ import { useState } from 'react';
 import React from 'react'
 import axios from 'axios';
 
-export default function Building() {
+export default function Customer() {
     const [formData, setFormData] = useState({
-        sharing: '',
-        rent: '',
-        availble_bed: '',
-        status: '',
-        deposite: '',
-        contract: '',
-        notice_period: ''
+        customer_name: '',
+        email_id: '',
+        phone_no: '',
+        occupation: '',
+        police_verification: ''
     });
 
     const [users, setUsers] = useState([]);
@@ -29,13 +27,11 @@ export default function Building() {
         setUsers([...users, formData]);
         const tru = await axios.post("http://localhost:8083/building/create", formData);
         setFormData({
-            sharing: '',
-            rent: '',
-            availble_bed: '',
-            status: '',
-            deposite: '',
-            contract: '',
-            notice_period: ''
+            customer_name: '',
+            email_id: '',
+            phone_no: '',
+            occupation: '',
+            police_verification: ''
         });
     };
     return (
@@ -45,31 +41,29 @@ export default function Building() {
                     <div className="col-sm-9 col-md-7 col-lg-5 mx-auto">
                         <div className="card border-0 shadow rounded-3 my-5">
                             <div className="card-body p-4 p-sm-5">
-                                <h5 className="card-title text-center mb-4 fw-dark fs-3">Building Description</h5>
+                                <h5 className="card-title text-center mb-4 fw-dark fs-3">Add Building Location</h5>
                                 <form onSubmit={handleSubmit}>
-
-                                    <div>Sharing</div>
-                                    <div className="form mb-3">
-                                        <select className="form-select" aria-label="Default select example" onChange={handleChange} id="applicable_for" name="applicable_for" value={formData.applicable_for} >
-                                            <option value='1'>Single </option>
-                                            <option value='2'>Two Sharing</option>
-                                            <option value='3'>Three Sharing</option>
-                                        </select>
+                                    <div className="form-floating mb-3">
+                                        <input type="text" className="form-control" id="customer_name" name="customer_name" value={formData.customer_name} onChange={handleChange} required />
+                                        <label htmlFor="customer_name">Customer FirstName</label>
                                     </div>
                                     <div className="form-floating mb-3">
-                                        <input type="text" className="form-control" id="building_name" name="building_name" value={formData.building_name} onChange={handleChange} required />
-                                        <label htmlFor="building_name">Building Name</label>
+                                        <input type="text" className="form-control" id="email_id" name="email_id" value={formData.email_id} onChange={handleChange} required />
+                                        <label htmlFor="email_id">Email Id</label>
                                     </div>
-                                    <div className="form-check mb-2 ">
-
-                                        <input type="radio" className="form-check-input" id="authenticationTrue" name="authentication" value="true" onChange={handleChange} />
-                                        <label className="form-check-label" htmlFor="authenticationTrue">Yes</label>
+                                    <div className="form-floating mb-3">
+                                        <input type="text" className="form-control" id="customer_name" name="customer_name" value={formData.customer_name} onChange={handleChange} required />
+                                        <label htmlFor="customer_name">Building Name</label>
                                     </div>
-                                    <div className="form-check mb-2">
-                                        <input type="radio" className="form-check-input" id="authenticationFalse" name="authentication" value="false" onChange={handleChange} />
-                                        <label className="form-check-label" htmlFor="authenticationFalse">No</label>
-
+                                    <div className="form-floating mb-3">
+                                        <input type="text" className="form-control" id="customer_name" name="customer_name" value={formData.customer_name} onChange={handleChange} required />
+                                        <label htmlFor="customer_name">Building Name</label>
                                     </div>
+                                    <div className="form-floating mb-3">
+                                        <input type="text" className="form-control" id="customer_name" name="customer_name" value={formData.customer_name} onChange={handleChange} required />
+                                        <label htmlFor="customer_name">Building Name</label>
+                                    </div>
+                                    
                                     <div className="d-grid">
                                         <button className="btn btn-primary btn-login text-uppercase fw-bold" type="submit">Next</button>
                                     </div>

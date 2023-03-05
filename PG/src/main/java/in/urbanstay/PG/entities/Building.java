@@ -33,8 +33,8 @@ public class Building {
 	private boolean authentication ;
 	private String applicable_for;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	private Room room;
+	@OneToMany(mappedBy="building")
+	private Set<Room> rooms;
 	
 	
 	@OneToOne(cascade = CascadeType.ALL)

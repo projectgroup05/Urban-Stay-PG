@@ -1,10 +1,11 @@
 package in.urbanstay.PG.entities;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,23 +18,19 @@ import lombok.Setter;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Services {
+public class Room {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long service_id;
-	private boolean ac_room;
-	private boolean no_ac_room;
-	private boolean wifi;
-	private boolean water_purifier;
-	private boolean refrigerator;
-	private boolean washing_machine;
-	private boolean food_facility;
-	private boolean sports;
-	private boolean gym;
-	private boolean parking;
-	private int distance_station;
+	private Long room_no;	
+	private int sharing;
+	private int rent;
+	private int availble_bed;
+	private boolean status;
+	private int deposite;
+	private int contract;
+	private int notice_period;
 	
-	@OneToOne(mappedBy="services")
+	@ManyToOne(cascade = CascadeType.ALL)
 	private Building building;
 }

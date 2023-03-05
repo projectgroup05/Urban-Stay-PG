@@ -15,17 +15,14 @@ import lombok.Setter;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Customer {
+public class Manager {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long customer_Id;
-	private String customer_name;
-	private String email_id;
-	private int phone_no;
-	private String occupation;
-	private String police_verification;
+	private Long manager_Id;
+	private String first_name ;
+	private String last_name ;
+	private String manager_email ;
+	private Long phone_no ;
 	
-	
-
 }
