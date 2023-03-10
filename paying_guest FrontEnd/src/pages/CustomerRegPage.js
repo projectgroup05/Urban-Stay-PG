@@ -26,7 +26,7 @@ export default function Customer() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         setUsers([...users, formData]);
-        const tru = await axios.post("http://localhost:8083/building/create", formData);
+
         setFormData({
             first_name: '',
             last_name: '',

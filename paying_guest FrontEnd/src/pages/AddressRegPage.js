@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import React from 'react'
 import axios from 'axios';
+import { Link, useNavigate } from 'react-router-dom'
 
 export default function Address() {
     const [formData, setFormData] = useState({
@@ -13,6 +14,7 @@ export default function Address() {
     });
 
     const [users, setUsers] = useState([]);
+    const navigate = useNavigate();
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -26,7 +28,6 @@ export default function Address() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         setUsers([...users, formData]);
-        const tru = await axios.post("", formData);
         setFormData({
             area_name: '',
             street: '',
@@ -35,9 +36,10 @@ export default function Address() {
             state: '',
             pincode: ''
         });
+        navigate('/building/room/register');
     };
     return (
-        <div><body>
+        <div>
             <div className="container">
                 <div className="row">
                     <div className="col-sm-9 col-md-7 col-lg-5 mx-auto">
@@ -47,27 +49,27 @@ export default function Address() {
                                 <form onSubmit={handleSubmit}>
                                     <div className="form-floating mb-3">
                                         <input type="text" className="form-control" id="area_name" name="area_name" value={formData.area_name} onChange={handleChange} required />
-                                        <label htmlfor="area_name">Area Name</label>
+                                        <label htmlFor="area_name">Area Name</label>
                                     </div>
                                     <div className="form-floating mb-3">
                                         <input type="text" className="form-control" id="street" name="street" value={formData.street} onChange={handleChange} required />
-                                        <label htmlfor="street">Street</label>
+                                        <label htmlFor="street">Street</label>
                                     </div>
                                     <div className="form-floating mb-3">
                                         <input type="text" className="form-control" id="city" name="city" value={formData.city} onChange={handleChange} required />
-                                        <label htmlfor="city">City</label>
+                                        <label htmlFor="city">City</label>
                                     </div>
                                     <div className="form-floating mb-3">
                                         <input type="text" className="form-control" id="district" name="district" value={formData.district} onChange={handleChange} required />
-                                        <label htmlfor="district">District</label>
+                                        <label htmlFor="district">District</label>
                                     </div>
                                     <div className="form-floating mb-3">
                                         <input type="text" className="form-control" id="state" name="state" value={formData.state} onChange={handleChange} required />
-                                        <label htmlfor="address">State</label>
+                                        <label htmlFor="address">State</label>
                                     </div>
                                     <div className="form-floating mb-3">
                                         <input type="number" className="form-control" id="pincode" name="pincode" value={formData.pincode} onChange={handleChange} required />
-                                        <label htmlfor="pincode">Area Pincode</label>
+                                        <label htmlFor="pincode">Area Pincode</label>
                                     </div>
                                     <div className="d-grid">
                                         <button className="btn btn-primary btn-login text-uppercase fw-bold" type="submit">Next</button>
@@ -78,7 +80,7 @@ export default function Address() {
                     </div>
                 </div>
             </div>
-        </body>
+
             <table className="user-table">
                 <thead>
                     <tr>

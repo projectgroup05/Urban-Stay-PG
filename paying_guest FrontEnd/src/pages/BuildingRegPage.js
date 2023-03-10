@@ -1,19 +1,18 @@
 import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom'
+
 import React from 'react'
 import axios from 'axios';
 
 export default function Building() {
     const [formData, setFormData] = useState({
-        sharing: '',
-        rent: '',
-        availble_bed: '',
-        status: '',
-        deposite: '',
-        contract: '',
-        notice_period: ''
+        building_name: '',
+        applicable_for: '',
+        authentication: 'true'
     });
 
     const [users, setUsers] = useState([]);
+    const navigate = useNavigate();
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -27,16 +26,13 @@ export default function Building() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         setUsers([...users, formData]);
-        const tru = await axios.post("http://localhost:8083/building/create", formData);
+
         setFormData({
-            sharing: '',
-            rent: '',
-            availble_bed: '',
-            status: '',
-            deposite: '',
-            contract: '',
-            notice_period: ''
+            building_name: '',
+            applicable_for: '',
+            authentication: ''
         });
+        navigate('/building/address');
     };
     return (
         <div>
@@ -47,18 +43,16 @@ export default function Building() {
                             <div className="card-body p-4 p-sm-5">
                                 <h5 className="card-title text-center mb-4 fw-dark fs-3">Building Description</h5>
                                 <form onSubmit={handleSubmit}>
-
-                                    <div>Sharing</div>
-                                    <div className="form mb-3">
-                                        <select className="form-select" aria-label="Default select example" onChange={handleChange} id="applicable_for" name="applicable_for" value={formData.applicable_for} >
-                                            <option value='1'>Single </option>
-                                            <option value='2'>Two Sharing</option>
-                                            <option value='3'>Three Sharing</option>
-                                        </select>
-                                    </div>
                                     <div className="form-floating mb-3">
                                         <input type="text" className="form-control" id="building_name" name="building_name" value={formData.building_name} onChange={handleChange} required />
                                         <label htmlFor="building_name">Building Name</label>
+                                    </div>
+                                    <div className="form mb-3">
+                                        <select className="form-select" aria-label="Default select example" onChange={handleChange} id="applicable_for" name="applicable_for" value={formData.applicable_for} >
+                                            <option value="unisex">Unisex</option>
+                                            <option value="male">Male</option>
+                                            <option value="female">Female</option>
+                                        </select>
                                     </div>
                                     <div className="form-check mb-2 ">
 

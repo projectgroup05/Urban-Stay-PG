@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import React from 'react'
 import axios from 'axios';
+import { Link, useNavigate } from 'react-router-dom'
 
-export default function Services() {
+export default function ServicesRegPage() {
     const [formData, setFormData] = useState({
         ac_room: 'false',
         no_ac_room: 'false',
@@ -17,6 +18,7 @@ export default function Services() {
     });
 
     const [users, setUsers] = useState([]);
+    const navigate = useNavigate();
 
 
     const handleChange = (event) => {
@@ -35,7 +37,7 @@ export default function Services() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         setUsers([...users, formData]);
-        const tru = await axios.post("http://localhost:8083/building/create", formData);
+
         setFormData({
             ac_room: '',
             no_ac_room: '',
@@ -49,6 +51,7 @@ export default function Services() {
             parking: '',
 
         });
+        navigate('/building/manager/info');
     };
     return (
         <div>

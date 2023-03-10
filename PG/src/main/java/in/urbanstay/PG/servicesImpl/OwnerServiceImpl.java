@@ -35,7 +35,7 @@ public class OwnerServiceImpl implements OwnerService {
 	@Override
 	public List<Owner> OwnerDetails(String name) {
 		// TODO Auto-generated method stub
-		return ownerRepository.findByNameContaining(name);
+		return ownerRepository.findByfirstNameContaining(name);
 	}
 
 	@Override

@@ -1,15 +1,19 @@
 import { useState } from 'react';
 import React from 'react'
 import axios from 'axios';
+import { Link, useNavigate } from 'react-router-dom';
 
-export default function Login() {
+
+export default function LoginPage() {
     const [formData, setFormData] = useState({
         username: '',
         password: ''
 
     });
 
+
     const [users, setUsers] = useState([]);
+    const navigate = useNavigate();
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -23,11 +27,13 @@ export default function Login() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         setUsers([...users, formData]);
-        const tru = await axios.post("http://localhost:8083/building/create", formData);
+
         setFormData({
             username: '',
             password: ''
         });
+
+        navigate('/owner/info');
     };
     return (
         <div>
@@ -38,22 +44,28 @@ export default function Login() {
                             <div className="card-body p-4 p-sm-5">
                                 <h5 className="card-title text-center mb-4 fw-dark fs-3">Sign in </h5>
                                 <form onSubmit={handleSubmit}>
-                                    <div className="form-floating mb-3">
+                                    <div className="form-floating mb-4">
                                         <input type="text" className="form-control" id="username" name="username" value={formData.username} onChange={handleChange} required />
                                         <label htmlFor="username">User Name</label>
                                     </div>
-                                    <div className="form-floating mb-3">
+                                    <div className="form-floating mb-4">
                                         <input type="text" className="form-control" id="password" name="password" value={formData.password} onChange={handleChange} required />
                                         <label htmlFor="password">Password</label>
                                     </div>
 
-                                    <div className="d-grid">
+                                    <div className="d-grid mb-3">
                                         <button className="btn btn-primary btn-login text-uppercase fw-bold" type="submit">Sign In</button>
                                     </div>
-                                </form>
+
+
+                                </form>.
+                                <div className="d-grid ">
+                                    <Link to="/owner/signup"  >Create Account </Link>
+                                </div>
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
 

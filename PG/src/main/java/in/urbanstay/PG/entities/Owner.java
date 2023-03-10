@@ -28,7 +28,6 @@ public class Owner {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long ownerId;
-	private String name ;
 	private String firstName;
 	private String lastName;
 	private String email;

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom'
 import React from 'react'
 import axios from 'axios';
 
@@ -7,10 +8,12 @@ export default function Customer() {
         first_name: '',
         last_name: '',
         manager_email: '',
-        phone_no: ''
+        phone_no: '',
+        gender: 'male'
     });
 
     const [users, setUsers] = useState([]);
+    const navigate = useNavigate();
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -24,7 +27,7 @@ export default function Customer() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         setUsers([...users, formData]);
-        const tru = await axios.post("http://localhost:8083/building/create", formData);
+
         setFormData({
             first_name: '',
             last_name: '',
@@ -32,6 +35,7 @@ export default function Customer() {
             phone_no: '',
             gender: ''
         });
+        navigate('/owner/info');
     };
     return (
         <div>

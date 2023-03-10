@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import React from 'react'
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom'
 
-export default function Signup() {
+export default function SignupPage() {
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -12,6 +13,8 @@ export default function Signup() {
     username: '',
     password: ''
   });
+
+  const navigate = useNavigate();
 
   const [users, setUsers] = useState([]);
 
@@ -27,7 +30,7 @@ export default function Signup() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     setUsers([...users, formData]);
-    const tru = await axios.post("http://localhost:8083/owner/create", formData);
+
     setFormData({
       firstName: '',
       lastName: '',
@@ -37,9 +40,10 @@ export default function Signup() {
       username: '',
       password: ''
     });
+    navigate('/owner/login');
   };
   return (
-    <div><body>
+    <div>
       <div className="container">
         <div className="row">
           <div className="col-sm-9 col-md-7 col-lg-5 mx-auto">
@@ -86,7 +90,7 @@ export default function Signup() {
           </div>
         </div>
       </div>
-    </body>
+
       <table className="user-table">
         <thead>
           <tr>

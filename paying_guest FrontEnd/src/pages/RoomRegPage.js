@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom'
 import React from 'react'
 import axios from 'axios';
 
@@ -14,6 +15,7 @@ export default function Building() {
     });
 
     const [users, setUsers] = useState([]);
+    const navigate = useNavigate();
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -27,7 +29,7 @@ export default function Building() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         setUsers([...users, formData]);
-        const tru = await axios.post("http://localhost:8083/building/create", formData);
+
         setFormData({
             rent: '',
             sharing: '1',
@@ -37,6 +39,9 @@ export default function Building() {
             contract: '',
             notice_period: ''
         });
+
+        navigate('/building/services/register');
+
     };
     return (
         <div>
@@ -60,13 +65,16 @@ export default function Building() {
                                         </select>
                                     </div>
                                     <div className="form-floating mb-3">
+                                        <input type="number" className="form-control" id="availble_bed" name="availble_bed" value={formData.availble_bed} onChange={handleChange} required />
+                                        <label htmlFor="availble_bed">Availabe Bed</label>
+                                    </div>
+                                    <div className="form-floating mb-3">
                                         <input type="number" className="form-control" id="deposite" name="deposite" value={formData.deposite} onChange={handleChange} required />
                                         <label htmlFor="deposite">Deposite</label>
                                     </div>
                                     <div className="form-floating mb-3">
                                         <input type="number" className="form-control" id="contract" name="contract" value={formData.contract} onChange={handleChange} required />
-                                        <label htmlFor="contract">Minimum
-                                            Contract</label>
+                                        <label htmlFor="contract">Minimum Contract in Month</label>
                                     </div>
                                     <div className="form-floating mb-3">
                                         <input type="number" className="form-control" id="notice_period" name="notice_period" value={formData.notice_period} onChange={handleChange} required />
@@ -90,35 +98,51 @@ export default function Building() {
                     </div>
                 </div>
             </div>
+            <div>
+                <div className="container">
+                    <div className="row">
+                        <div className="col-sm-9 col-md-7 col-lg-5 mx-auto">
+                            <div className="card border-0 shadow rounded-3 my-5">
+                                <div className="card-body p-4 p-sm-5">
+                                    <h5 className="card-title text-center mb-4 fw-dark fs-3">Typs Of Bed</h5>
 
-            <table className="user-table">
-                <thead>
-                    <tr>
-                        <th>firstName</th>
-                        <th>lastName</th>
-                        <th>email</th>
-                        <th>phone_no</th>
-                        <th>username</th>
-                        <th>password</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {users.map((user, index) => (
-                        <tr key={index}>
+                                    <table className="user-table">
+                                        <thead>
+                                            <tr>
+                                                <th>rent</th>
+                                                <th>sharing</th>
+                                                <th>availble_bed</th>
+                                                <th>deposite</th>
+                                                <th>contract</th>
+                                                <th>notice_period</th>
+                                                <th>status</th>
 
-                            <td>{user.rent}</td>
-                            <td>{user.sharing}</td>
-                            <td>{user.availble_bed}</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {users.map((user, index) => (
+                                                <tr key={index}>
 
-                            <td>{user.deposite}</td>
-                            <td>{user.contract}</td>
-                            <td>{user.notice_period}</td>
-                            <td>{user.status}</td>
+                                                    <td>{user.rent}</td>
+                                                    <td>{user.sharing}</td>
+                                                    <td>{user.availble_bed}</td>
 
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
+                                                    <td>{user.deposite}</td>
+                                                    <td>{user.contract}</td>
+                                                    <td>{user.notice_period}</td>
+                                                    <td>{user.status}</td>
+
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
         </div>
     )
 }
