@@ -35,6 +35,7 @@ public class Owner {
 	private String address;
 	private String username;
 	private String password;
+	private Role role;
 	
 	@ManyToMany(fetch = FetchType.LAZY , cascade = CascadeType.ALL)
 	@JoinTable(name = "Owner_Buildings",

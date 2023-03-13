@@ -2,7 +2,7 @@ package in.urbanstay.PG.services;
 
 import java.util.List;
 
-import in.urbanstay.PG.entities.Login;
+import in.urbanstay.PG.dto.AuthRequest;
 import in.urbanstay.PG.entities.Owner;
 
 public interface OwnerService {
@@ -11,5 +11,5 @@ public interface OwnerService {
 	public List<Owner> getAllOwner();
 	public List<Owner> OwnerDetails(String name);
 	public Owner assignBuilding(Long ownerId, Long buildingId);
-	public Owner ownerLogin(Login loginObj);
+	public Owner ownerLogin(AuthRequest authRequest);
 }

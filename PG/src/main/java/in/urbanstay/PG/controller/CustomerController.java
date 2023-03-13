@@ -14,7 +14,6 @@ import in.urbanstay.PG.services.CustomerService;
 public class CustomerController {
 
 	@Autowired
-	
 	private CustomerService customerService;
 	
 
