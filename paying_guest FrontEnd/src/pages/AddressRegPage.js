@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import React from 'react'
-import axios from 'axios';
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom';
+import { saveaddress } from '../services/privateservices'
 
 export default function Address() {
     const [formData, setFormData] = useState({
@@ -36,7 +36,18 @@ export default function Address() {
             state: '',
             pincode: ''
         });
-        navigate('/building/room/register');
+
+
+        try {
+            let address = await saveaddress(formData)
+            console.log("try");
+            navigate('/building/room/register');
+
+        }
+        catch {
+            console.log("error");
+
+        }
     };
     return (
         <div>
@@ -80,32 +91,6 @@ export default function Address() {
                     </div>
                 </div>
             </div>
-
-            <table className="user-table">
-                <thead>
-                    <tr>
-                        <th>firstName</th>
-                        <th>lastName</th>
-                        <th>email</th>
-                        <th>phone_no</th>
-                        <th>username</th>
-                        <th>password</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {users.map((user, index) => (
-                        <tr key={index}>
-                            <td>{user.area_name}</td>
-                            <td>{user.street}</td>
-                            <td>{user.city}</td>
-                            <td>{user.district}</td>
-                            <td>{user.state}</td>
-                            <td>{user.pincode}</td>
-
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
         </div>
     )
 }

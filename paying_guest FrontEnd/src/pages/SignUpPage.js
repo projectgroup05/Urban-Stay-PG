@@ -2,6 +2,7 @@ import { useState } from 'react';
 import React from 'react'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'
+import { signupuser } from '../services/user_services'
 
 export default function SignupPage() {
   const [formData, setFormData] = useState({
@@ -11,7 +12,8 @@ export default function SignupPage() {
     phone_no: '',
     address: '',
     username: '',
-    password: ''
+    password: '',
+    role: "ROLE_ADMIN"
   });
 
   const navigate = useNavigate();
@@ -31,20 +33,33 @@ export default function SignupPage() {
     event.preventDefault();
     setUsers([...users, formData]);
 
-    setFormData({
-      firstName: '',
-      lastName: '',
-      email: '',
-      phone_no: '',
-      address: '',
-      username: '',
-      password: ''
-    });
-    navigate('/owner/login');
+    // setFormData({
+    //   firstName: '',
+    //   lastName: '',
+    //   email: '',
+    //   phone_no: '',
+    //   address: '',
+    //   username: '',
+    //   password: ''
+    // });
+    try {
+      let owner = await signupuser(formData)
+
+      console.log("try");
+      navigate('/owner/login');
+
+    }
+    catch {
+      console.log("error");
+
+    }
+
+
+
   };
   return (
     <div>
-      <div className="container">
+      <div className="container" style={{ marginTop: '20vh' }}>
         <div className="row">
           <div className="col-sm-9 col-md-7 col-lg-5 mx-auto">
             <div className="card border-0 shadow rounded-3 my-5">
@@ -90,32 +105,6 @@ export default function SignupPage() {
           </div>
         </div>
       </div>
-
-      <table className="user-table">
-        <thead>
-          <tr>
-            <th>firstName</th>
-            <th>lastName</th>
-            <th>email</th>
-            <th>phone_no</th>
-            <th>username</th>
-            <th>password</th>
-          </tr>
-        </thead>
-        <tbody>
-          {users.map((user, index) => (
-            <tr key={index}>
-              <td>{user.firstName}</td>
-              <td>{user.lastName}</td>
-              <td>{user.email}</td>
-              <td>{user.phone_no}</td>
-              <td>{user.address}</td>
-              <td>{user.username}</td>
-              <td>{user.password}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
     </div>
   )
 }

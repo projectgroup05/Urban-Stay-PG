@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom'
 import React from 'react'
 import axios from 'axios';
+import { addmanager } from '../services/privateservices'
 
 export default function Customer() {
     const [formData, setFormData] = useState({
@@ -35,7 +36,18 @@ export default function Customer() {
             phone_no: '',
             gender: ''
         });
-        navigate('/owner/info');
+
+
+        try {
+            let owner = await addmanager(formData)
+            console.log("try");
+            navigate('/owner/info');
+
+        }
+        catch {
+            console.log("error");
+
+        }
     };
     return (
         <div>
@@ -78,32 +90,6 @@ export default function Customer() {
                     </div>
                 </div>
             </div>
-
-            <table className="user-table">
-                <thead>
-                    <tr>
-                        <th>firstName</th>
-                        <th>lastName</th>
-                        <th>email</th>
-                        <th>phone_no</th>
-                        <th>username</th>
-                        <th>password</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {users.map((user, index) => (
-                        <tr key={index}>
-                            <td>{user.first_name}</td>
-                            <td>{user.last_name}</td>
-                            <td>{user.phone_no}</td>
-                            <td>{user.gender}</td>
-                            <td>{user.occupation}</td>
-                            <td>{user.police_verification}</td>
-
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
         </div>
     )
 }

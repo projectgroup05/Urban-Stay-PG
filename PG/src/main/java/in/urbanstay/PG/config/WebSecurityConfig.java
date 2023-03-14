@@ -37,14 +37,14 @@ public class WebSecurityConfig {
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		
 		return  
-				http.cors()
-				.and()
-				.csrf().disable()
+		http.cors()
+		.and()
+		.csrf().disable()
 		.authorizeHttpRequests()
-		.antMatchers("owner/login").permitAll().
+		.antMatchers("/owner/login","/customer/**","/owner/signup","/owner/ownerdata","/address/**").permitAll().
 		and()
 		.authorizeHttpRequests()
-		.antMatchers(/* "/users/**", */"/builder/**").authenticated()
+		.antMatchers("/owner/**","/manager/**","/room/**","/services/**").authenticated()
 		.and()
 		.formLogin()
 		.and()

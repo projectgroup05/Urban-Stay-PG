@@ -1,6 +1,7 @@
 package in.urbanstay.PG.servicesImpl;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,23 +44,29 @@ public class OwnerServiceImpl implements OwnerService {
 		return ownerRepository.findByfirstNameContaining(name);
 	}
 
-	@Override
-	public Owner assignBuilding(Long ownerId, Long buildingId) {
-		Set<Building> buildingSet = null;
-		Owner owner = ownerRepository.findById(ownerId).get();
-		Building building = buildingRepository.findById(buildingId).get();
-
-		buildingSet = owner.getAssignBuildings();
-		buildingSet.add(building);
-		owner.setAssignBuildings(buildingSet);
-		ownerRepository.save(owner);
-
-		return owner;
-	}
+//	@Override
+//	public Owner assignBuilding(Long ownerId, Long buildingId) {
+//		Set<Building> buildingSet = null;
+//		Owner owner = ownerRepository.findById(ownerId).get();
+//		Building building = buildingRepository.findById(buildingId).get();
+//
+//		buildingSet = owner.getAssignBuildings();
+//		buildingSet.add(building);
+//		owner.setAssignBuildings(buildingSet);
+//		ownerRepository.save(owner);
+//
+//		return owner;
+//	}
 
 	@Override
 	public Owner ownerLogin(AuthRequest authRequest) {
 		return ownerRepository.findByUsernameAndPassword(authRequest.getUsername(), authRequest.getPassword());
+	}
+
+	@Override
+	public Optional<Owner> OwnerDetail(Long ownerId) {
+		
+		return ownerRepository.findById(ownerId);
 	}
 
 }

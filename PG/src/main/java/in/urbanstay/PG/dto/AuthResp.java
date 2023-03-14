@@ -13,7 +13,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AuthResp {
-	private Long id;
+	private Long ownerId;
 
 	private String username;
 

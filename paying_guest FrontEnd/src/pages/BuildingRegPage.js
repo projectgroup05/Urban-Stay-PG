@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom'
-
+import { addbuilding } from '../services/privateservices'
 import React from 'react'
 import axios from 'axios';
 
 export default function Building() {
     const [formData, setFormData] = useState({
         building_name: '',
-        applicable_for: '',
+        applicable_for: 'male',
         authentication: 'true'
     });
 
@@ -32,11 +32,24 @@ export default function Building() {
             applicable_for: '',
             authentication: ''
         });
-        navigate('/building/address');
+
+        try {
+            let building = await addbuilding(formData);
+            const building_Id = building.data;
+            console.log("try");
+            localStorage.setItem("building_Id", building_Id);
+            navigate('/building/address');
+
+        }
+        catch {
+            console.log("error");
+
+        }
+
     };
     return (
         <div>
-            <div className="container">
+            <div className="container" style={{ marginTop: '20vh' }}>
                 <div className="row">
                     <div className="col-sm-9 col-md-7 col-lg-5 mx-auto">
                         <div className="card border-0 shadow rounded-3 my-5">
@@ -47,12 +60,22 @@ export default function Building() {
                                         <input type="text" className="form-control" id="building_name" name="building_name" value={formData.building_name} onChange={handleChange} required />
                                         <label htmlFor="building_name">Building Name</label>
                                     </div>
+                                    <div>
+                                        <label style={{ float: 'left', color: "grey" }} htmlFor="building_name"><strong>Applicable for</strong></label>
+                                        <br />
+                                    </div>
+
                                     <div className="form mb-3">
                                         <select className="form-select" aria-label="Default select example" onChange={handleChange} id="applicable_for" name="applicable_for" value={formData.applicable_for} >
-                                            <option value="unisex">Unisex</option>
+                                            <option defaultValue="" disabled="disabled"  >Applicable for</option>
                                             <option value="male">Male</option>
                                             <option value="female">Female</option>
+                                            <option value="unisex">Both</option>
                                         </select>
+                                    </div>
+                                    <div>
+                                        <label style={{ float: 'left', color: "grey" }} htmlFor="building_name"><strong>Police Authenticated</strong></label>
+                                        <br />
                                     </div>
                                     <div className="form-check mb-2 ">
 
@@ -74,28 +97,6 @@ export default function Building() {
                 </div>
             </div>
 
-            <table className="user-table">
-                <thead>
-                    <tr>
-                        <th>firstName</th>
-                        <th>lastName</th>
-                        <th>email</th>
-                        <th>phone_no</th>
-                        <th>username</th>
-                        <th>password</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {users.map((user, index) => (
-                        <tr key={index}>
-                            <td>{user.building_name}</td>
-                            <td>{user.applicable_for}</td>
-                            <td>{user.authentication}</td>
-
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
         </div>
     )
 }

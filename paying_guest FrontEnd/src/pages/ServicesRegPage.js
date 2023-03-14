@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import React from 'react'
-import axios from 'axios';
+import { servicesadd } from '../services/privateservices';
 import { Link, useNavigate } from 'react-router-dom'
 
 export default function ServicesRegPage() {
@@ -51,7 +51,16 @@ export default function ServicesRegPage() {
             parking: '',
 
         });
-        navigate('/building/manager/info');
+
+        try {
+            let owner = await servicesadd(formData)
+            console.log("try");
+            navigate('/building/manager/info');
+        }
+        catch {
+            console.log("error");
+
+        }
     };
     return (
         <div>
@@ -113,38 +122,6 @@ export default function ServicesRegPage() {
                     </div>
                 </div>
             </div>
-
-            <table className="user-table">
-                <thead>
-                    <tr>
-                        <th>firstName</th>
-                        <th>lastName</th>
-                        <th>email</th>
-                        <th>phone_no</th>
-                        <th>username</th>
-                        <th>password</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {users.map((user, index) => (
-                        <tr key={index}>
-                            <td>{user.ac_room}</td>
-                            <td>{user.no_ac_room}</td>
-                            <td>{user.wifi}</td>
-                            <td>{user.water_purifier}</td>
-                            <td>{user.refrigerator}</td>
-                            <td>{user.washing_machine}</td>
-
-                            <td>{user.food_facility}</td>
-                            <td>{user.sports}</td>
-                            <td>{user.gym}</td>
-                            <td>{user.parking}</td>
-
-
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
         </div>
     )
 }

@@ -2,6 +2,9 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom'
 import React from 'react'
 import axios from 'axios';
+import './table.css';
+
+import { roomadd } from '../services/privateservices'
 
 export default function Building() {
     const [formData, setFormData] = useState({
@@ -26,26 +29,37 @@ export default function Building() {
         });
     };
 
+    const nextpage = (event) => { event.preventDefault(); navigate('/building/services/register'); };
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         setUsers([...users, formData]);
+        try {
+            let room = await roomadd(formData)
+            console.log("try");
+            setFormData({
+                rent: '',
+                sharing: '1',
+                availble_bed: '',
+                status: '',
+                deposite: '',
+                contract: '',
+                notice_period: ''
+            });
+            navigate('/building/services/register');
 
-        setFormData({
-            rent: '',
-            sharing: '1',
-            availble_bed: '',
-            status: '',
-            deposite: '',
-            contract: '',
-            notice_period: ''
-        });
+        }
+        catch {
+            console.log("error");
 
-        navigate('/building/services/register');
+        }
+
+
 
     };
     return (
         <div>
-            <div className="container">
+            <div className="container" style={{ marginTop: '20vh' }}>
                 <div className="row">
                     <div className="col-sm-9 col-md-7 col-lg-5 mx-auto">
                         <div className="card border-0 shadow rounded-3 my-5">
@@ -90,7 +104,7 @@ export default function Building() {
                                         <label className="form-check-label" htmlFor="status">Not Available</label>
                                     </div>
                                     <div className="d-grid">
-                                        <button className="btn btn-primary btn-login text-uppercase fw-bold" type="submit">Next</button>
+                                        <button className="btn btn-primary btn-login text-uppercase fw-bold" type="button">ADD</button>
                                     </div>
                                 </form>
                             </div>
@@ -105,37 +119,31 @@ export default function Building() {
                             <div className="card border-0 shadow rounded-3 my-5">
                                 <div className="card-body p-4 p-sm-5">
                                     <h5 className="card-title text-center mb-4 fw-dark fs-3">Typs Of Bed</h5>
-
                                     <table className="user-table">
                                         <thead>
                                             <tr>
-                                                <th>rent</th>
-                                                <th>sharing</th>
-                                                <th>availble_bed</th>
-                                                <th>deposite</th>
-                                                <th>contract</th>
-                                                <th>notice_period</th>
-                                                <th>status</th>
-
+                                                <th>RENT</th>
+                                                <th>SHARING</th>
+                                                <th>AVL_BED</th>
+                                                <th>STATUS</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             {users.map((user, index) => (
                                                 <tr key={index}>
-
                                                     <td>{user.rent}</td>
                                                     <td>{user.sharing}</td>
                                                     <td>{user.availble_bed}</td>
-
-                                                    <td>{user.deposite}</td>
                                                     <td>{user.contract}</td>
-                                                    <td>{user.notice_period}</td>
                                                     <td>{user.status}</td>
-
                                                 </tr>
                                             ))}
                                         </tbody>
                                     </table>
+
+                                    <div className="d-grid">
+                                        <button className="btn btn-primary btn-login text-uppercase fw-bold" onClick={nextpage} type="submit">Next</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>

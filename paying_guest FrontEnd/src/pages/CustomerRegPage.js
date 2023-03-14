@@ -39,7 +39,7 @@ export default function Customer() {
     };
     return (
         <div>
-            <div className="container">
+            <div className="container" style={{ marginTop: '20vh' }}>
                 <div className="row">
                     <div className="col-sm-9 col-md-7 col-lg-5 mx-auto">
                         <div className="card border-0 shadow rounded-3 my-5">
@@ -93,32 +93,6 @@ export default function Customer() {
                     </div>
                 </div>
             </div>
-
-            <table className="user-table">
-                <thead>
-                    <tr>
-                        <th>firstName</th>
-                        <th>lastName</th>
-                        <th>email</th>
-                        <th>phone_no</th>
-                        <th>username</th>
-                        <th>password</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {users.map((user, index) => (
-                        <tr key={index}>
-                            <td>{user.first_name}</td>
-                            <td>{user.last_name}</td>
-                            <td>{user.phone_no}</td>
-                            <td>{user.gender}</td>
-                            <td>{user.occupation}</td>
-                            <td>{user.police_verification}</td>
-
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
         </div>
     )
 }

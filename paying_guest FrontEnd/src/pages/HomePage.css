@@ -1,0 +1,16 @@
+.imageBanner{
+    margin: 20px;
+    min-height: 20vh;
+    width: auto;
+}
+#imgDiv{
+    background: 'url("https://res.cloudinary.com/stanza-living/image/upload/f_auto,q_auto,w_600/e_improve/e_sharpen:10/e_saturation:10/f_auto,q_auto/v1638170160/Website/CMS-Uploads/hv2ijnmhybtq1viz7mbh.jpg") no-repeat';
+    border-radius: 25px;
+    position: 'absolute';
+    height: '1200px'; 
+    width: '3600px'; 
+    top: '0px'; 
+    left: '6vh';
+    marginTop:'20vh';
+    
+}
