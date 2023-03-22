@@ -23,7 +23,9 @@ function BuildingCard() {
   const navigate = useNavigate();
 
   const handleCardClick = (id) => {
-    navigate(`/building/${id}`);
+
+    // navigate(`/building/${id}`);
+    navigate('/customer/signup');
   };
 
   const rows = [];
@@ -35,10 +37,11 @@ function BuildingCard() {
         <div className="card mb-4">
           <img className="card-img-top" src={pg_img} alt={buildingList[i].buildings_id} />
           <div className="card-body">
-            <h5 className="card-title">{buildingList[i].building_name}</h5>
-            <p className="card-text">Authentication: {buildingList[i].address[1]}</p>
-            <p className="card-text">Applicable for: {buildingList[i].applicable_for}</p>
-            <button type="button" className="btn btn-secondary btn-sm" onClick={() => handleCardClick(buildingList[i].buildings_id)}>View Details</button>
+            <h5 className="card-title">NAME :{buildingList[i].building_name}</h5>
+            <p className="card-text">City :Pune</p>
+            <p className="card-text">Rent : 5000</p>
+            <p className="card-text">For {buildingList[i].applicable_for}</p>
+            <button type="button" className="btn btn-secondary btn-sm" onClick={() => handleCardClick(buildingList[i].buildings_id)}>Book PG</button>
           </div>
         </div>
       </div>

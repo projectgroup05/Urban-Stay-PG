@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 export default function Customer() {
@@ -23,6 +24,8 @@ export default function Customer() {
         });
     };
 
+    const navigate = useNavigate();
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         setUsers([...users, formData]);
@@ -36,6 +39,8 @@ export default function Customer() {
             occupation: '',
             police_verification: ''
         });
+        navigate('/buildingcards');
+
     };
     return (
         <div>

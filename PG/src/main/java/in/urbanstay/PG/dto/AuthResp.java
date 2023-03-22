@@ -14,14 +14,9 @@ import lombok.ToString;
 @AllArgsConstructor
 public class AuthResp {
 	private Long ownerId;
-
 	private String username;
-
 	private String firstName;
 	private String lastName;
-	
-
 	private Role role;
-
 	private String token;
 }
